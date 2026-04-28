@@ -16,7 +16,7 @@ title: "About"
 - Markdown 写作
 - 静态站点生成
 - GitHub Pages 部署
-- 自定义域名 `b1og.molulu.top`
+- 自定义域名 `blog.molulu.top`
 - 内置搜索、标签、归档和 RSS
 
 ## 联系方式

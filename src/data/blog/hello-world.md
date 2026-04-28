@@ -18,6 +18,6 @@ description: 第一篇占位文章，用来确认 AstroPaper 主题、自定义�
 - 文章写在 `src/data/blog/`
 - 文件格式是 Markdown
 - 推送到 GitHub 后可以自动部署到 GitHub Pages
-- 目标域名是 `b1og.molulu.top`
+- 目标域名是 `blog.molulu.top`
 
 后面新增文章时，直接继续添加新的 `.md` 文件就行。

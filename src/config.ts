@@ -1,5 +1,5 @@
 export const SITE = {
-  website: "https://b1og.molulu.top",
+  website: "https://blog.molulu.top",
   author: "Molulu",
   profile: "https://github.com/Mooo1u",
   desc: "Molulu 的 Markdown 博客，基于 AstroPaper 与 Astro 构建，部署在 GitHub Pages。",
