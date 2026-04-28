@@ -1,5 +1,5 @@
 ---
-author: Molulu
+author: Mo1u
 pubDatetime: 2026-04-28T23:55:00+08:00
 title: 博客已切到 AstroPaper
 featured: true

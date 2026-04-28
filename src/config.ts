@@ -1,9 +1,9 @@
 export const SITE = {
   website: "https://blog.molulu.top",
-  author: "Molulu",
+  author: "Mo1u",
   profile: "https://github.com/Mooo1u",
-  desc: "Molulu 的 Markdown 博客，基于 AstroPaper 与 Astro 构建，部署在 GitHub Pages。",
-  title: "Molulu Blog",
+  desc: "Mo1u 的 Markdown 博客，基于 AstroPaper 与 Astro 构建，部署在 GitHub Pages。",
+  title: "Mo1u's blog",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
