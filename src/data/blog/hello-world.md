@@ -21,3 +21,12 @@ description: 第一篇占位文章，用来确认 AstroPaper 主题、自定义�
 - 目标域名是 `blog.molulu.top`
 
 后面新增文章时，直接继续添加新的 `.md` 文件就行。
+
+![image-20260429120446581](../images/hello-world/image-20260429120446581.png)
+
+
+
+```python
+print("hello,world")
+```
+
