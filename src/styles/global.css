@@ -5,25 +5,26 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  --background: #f7fbff;
+  --foreground: #243240;
+  --accent: #69b7ff;
+  --muted: #dbeaf6;
+  --border: #d7e6f2;
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60;
-  --border: #ab4b08;
+  --background: #18222d;
+  --foreground: #e7f1fb;
+  --accent: #7cc4ff;
+  --muted: #243746;
+  --border: #355164;
 }
 
 @theme inline {
   --font-app:
-    "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    sans-serif;
+    "JetBrains Mono", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    monospace;
+  --font-code: "JetBrains Mono", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
@@ -53,6 +54,35 @@ html[data-theme="dark"] {
   }
 }
 
+.ui-transition {
+  transition-property:
+    color, background-color, border-color, text-decoration-color, opacity,
+    transform;
+  transition-duration: 140ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.ui-fade {
+  transition-property: opacity;
+  transition-duration: 140ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @utility max-w-app {
   @apply max-w-3xl;
 }
@@ -65,8 +95,6 @@ html[data-theme="dark"] {
   @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
 
-/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
-/* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 1rem;
 }

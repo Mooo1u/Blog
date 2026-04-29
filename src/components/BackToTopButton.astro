@@ -8,7 +8,7 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
   class:list={[
     "fixed end-4 bottom-8 z-50",
     "md:sticky md:end-auto md:float-end md:me-1",
-    "translate-y-14 opacity-0 transition duration-500",
+    "ui-fade pointer-events-none opacity-0",
   ]}
 >
   <button
@@ -33,8 +33,6 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
 </div>
 
 <script is:inline data-astro-rerun>
-  /** Scrolls the document to the top when
-   * the "Back to Top" button is clicked. */
   function backToTop() {
     const rootElement = document.documentElement;
     const btnContainer = document.querySelector("#btt-btn-container");
@@ -44,13 +42,11 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
     if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
       return;
 
-    // Attach click event handler for back-to-top button
     backToTopBtn.addEventListener("click", () => {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     });
 
-    // Handle button visibility according to scroll position
     let lastVisible = null;
     function handleScroll() {
       const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
@@ -66,9 +62,8 @@ import IconArrowNarrowUp from "@/assets/icons/IconArrowNarrowUp.svg";
 
       if (isVisible !== lastVisible) {
         btnContainer.classList.toggle("opacity-100", isVisible);
-        btnContainer.classList.toggle("translate-y-0", isVisible);
         btnContainer.classList.toggle("opacity-0", !isVisible);
-        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        btnContainer.classList.toggle("pointer-events-none", !isVisible);
         lastVisible = isVisible;
       }
     }

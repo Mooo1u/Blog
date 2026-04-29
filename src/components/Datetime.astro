@@ -23,15 +23,13 @@ const {
   class: className = "",
   timezone: postTimezone,
 } = Astro.props;
-
-/* ========== Formatted Datetime ========== */
 const isModified = modDatetime && modDatetime > pubDatetime;
 
 const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
   postTimezone || SITE.timezone
 );
 
-const date = datetime.format("D MMM, YYYY"); // e.g., '22 Mar, 2025'
+const date = datetime.format("D MMM, YYYY");
 ---
 
 <div class:list={["flex items-center gap-x-2 opacity-80", className]}>
