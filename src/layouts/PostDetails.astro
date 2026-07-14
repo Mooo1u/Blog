@@ -8,6 +8,7 @@ import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
+import TableOfContents from "@/components/TableOfContents.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -34,7 +35,7 @@ const {
   hideEditPost,
 } = post.data;
 
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 let ogImageUrl: string | undefined;
 
@@ -106,6 +107,8 @@ const nextPost =
     >
       <Content />
     </article>
+
+    <TableOfContents {headings} />
 
     <hr class="my-8 border-dashed" />
 
@@ -205,6 +208,46 @@ const nextPost =
     }
   }
   addHeadingLinks();
+
+  function setupTableOfContents() {
+    window.tableOfContentsCleanup?.();
+
+    const links = Array.from(document.querySelectorAll("[data-toc-link]"));
+    if (!links.length) return;
+
+    const headings = links
+      .map(link => document.getElementById(link.dataset.tocTarget ?? ""))
+      .filter(Boolean);
+
+    let frameId = 0;
+    function updateActiveHeading() {
+      frameId = 0;
+      let activeId = headings[0]?.id;
+
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top <= 120) activeId = heading.id;
+      }
+
+      for (const link of links) {
+        const isActive = link.dataset.tocTarget === activeId;
+        link.classList.toggle("border-accent", isActive);
+        link.classList.toggle("text-accent", isActive);
+        link.classList.toggle("font-semibold", isActive);
+      }
+    }
+
+    function onScroll() {
+      if (!frameId) frameId = window.requestAnimationFrame(updateActiveHeading);
+    }
+
+    updateActiveHeading();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.tableOfContentsCleanup = () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
+  }
+  setupTableOfContents();
 
   function attachCopyButtons() {
     const copyButtonLabel = "Copy";

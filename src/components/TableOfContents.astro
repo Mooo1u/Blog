@@ -1,0 +1,46 @@
+---
+type Heading = {
+  depth: number;
+  slug: string;
+  text: string;
+};
+
+type Props = {
+  headings: Heading[];
+};
+
+const { headings } = Astro.props;
+const tocHeadings = headings.filter(
+  heading => heading.depth >= 2 && heading.depth <= 4
+);
+---
+
+{
+  tocHeadings.length > 0 && (
+    <aside
+      class="fixed top-28 left-[calc(50%+25rem)] z-10 hidden w-48 min-[1200px]:block"
+      aria-label="文章目录"
+    >
+      <div class="border-s-2 border-accent ps-3">
+        <p class="mb-3 text-sm font-semibold text-accent">目录</p>
+        <nav class="max-h-[calc(100vh-9rem)] overflow-y-auto pe-2" aria-label="文章目录">
+          <ol class="space-y-1">
+            {tocHeadings.map(heading => (
+              <li>
+                <a
+                  href={`#${heading.slug}`}
+                  data-toc-link
+                  data-toc-target={heading.slug}
+                  class="ui-transition block border-s-2 border-transparent py-1 pe-1 text-sm leading-5 text-foreground/65 hover:border-accent/50 hover:text-foreground"
+                  style={`padding-inline-start: ${(heading.depth - 2) * 12}px`}
+                >
+                  <span class="line-clamp-2">{heading.text}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </div>
+    </aside>
+  )
+}

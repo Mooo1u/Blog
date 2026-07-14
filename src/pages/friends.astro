@@ -3,8 +3,10 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Main from "@/layouts/Main.astro";
-import { FRIEND_LINKS } from "@/data/friends";
+import { FRIEND_GROUPS, FRIEND_LINKS, type FriendGroup } from "@/data/friends";
 import { SITE } from "@/config";
+
+const groups: FriendGroup[] = ["team", "friends"];
 ---
 
 <Layout title={`友链 | ${SITE.title}`} description="朋友们的站点入口。">
@@ -13,40 +15,56 @@ import { SITE } from "@/config";
     pageTitle="友链"
     pageDesc="这里放一些朋友的站点链接。新增友链时，直接编辑 src/data/friends.ts。"
   >
-    <section class="pb-10">
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {
-          FRIEND_LINKS.map((friend) => (
-            <a
-              href={friend.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="ui-transition flex items-center gap-4 border border-border bg-background/80 p-4 hover:border-accent hover:bg-background hover:shadow-sm"
-            >
-              <img
-                src={friend.avatar}
-                alt={`${friend.id} avatar`}
-                width="72"
-                height="72"
-                class="h-[72px] w-[72px] border border-border object-cover"
-                loading="lazy"
-              />
-              <div class="min-w-0">
-                <h2 class="truncate text-lg font-semibold text-accent">
-                  {friend.id}
-                </h2>
-                <p class="mt-1 break-all text-sm text-foreground/70">
-                  {friend.url}
-                </p>
-                <p class="mt-2 text-sm leading-6 text-foreground/85">
-                  {friend.signature}
-                </p>
+    <div class="space-y-12 pb-10">
+      {
+        groups.map((group) => {
+          const links = FRIEND_LINKS.filter((friend) => friend.group === group);
+          const { title, description } = FRIEND_GROUPS[group];
+
+          return (
+            <section aria-labelledby={`${group}-heading`}>
+              <div class="mb-5 flex items-end justify-between border-b border-border pb-3">
+                <div>
+                  <h2 id={`${group}-heading`} class="text-xl font-semibold text-accent">
+                    {title}
+                  </h2>
+                  <p class="mt-1 text-sm text-foreground/70">{description}</p>
+                </div>
+                <span class="text-sm tabular-nums text-foreground/60">{links.length}</span>
               </div>
-            </a>
-          ))
-        }
-      </div>
-    </section>
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {
+                  links.map((friend) => (
+                    <a
+                      href={friend.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="ui-transition group flex min-h-28 items-center gap-4 border border-border bg-background/80 p-4 hover:border-accent hover:bg-background hover:shadow-sm"
+                    >
+                      <img
+                        src={friend.avatar}
+                        alt={`${friend.id} avatar`}
+                        width="64"
+                        height="64"
+                        class="h-16 w-16 shrink-0 border border-border object-cover transition-transform duration-200 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div class="min-w-0">
+                        <h3 class="truncate text-lg font-semibold text-accent">{friend.id}</h3>
+                        <p class="mt-1 truncate text-sm text-foreground/70">{friend.url}</p>
+                        <p class="mt-2 line-clamp-2 text-sm leading-6 text-foreground/85">
+                          {friend.signature}
+                        </p>
+                      </div>
+                    </a>
+                  ))
+                }
+              </div>
+            </section>
+          );
+        })
+      }
+    </div>
   </Main>
   <Footer />
 </Layout>
