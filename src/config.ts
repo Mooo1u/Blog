@@ -13,7 +13,7 @@ export const SITE = {
   showArchives: true,
   showBackButton: true,
   editPost: {
-    enabled: true,
+    enabled: false,
     text: "编辑此页",
     url: "https://github.com/Mooo1u/Blog/edit/main/",
   },

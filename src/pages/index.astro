@@ -44,21 +44,6 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p>
-        这里主要记录我用 Markdown 写下来的技术笔记、折腾过程和日常想法。
-        站点基于 Astro 与 AstroPaper 构建，部署在 GitHub Pages，并绑定到
-        `blog.molulu.top`。
-      </p>
-      <p class="mt-2">
-        文章都放在仓库里维护，
-        <LinkButton
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/Mooo1u/Blog"
-        >
-          GitHub 仓库
-        </LinkButton>
-        也会同步更新。
-      </p>
       {
         SOCIALS.length > 0 && (
           <div class="mt-4 flex max-sm:flex-col sm:items-center">
