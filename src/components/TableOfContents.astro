@@ -11,7 +11,7 @@ type Props = {
 
 const { headings } = Astro.props;
 const tocHeadings = headings.filter(
-  heading => heading.depth >= 2 && heading.depth <= 4
+  heading => heading.depth >= 1 && heading.depth <= 6
 );
 ---
 
@@ -32,7 +32,7 @@ const tocHeadings = headings.filter(
                   data-toc-link
                   data-toc-target={heading.slug}
                   class="ui-transition block border-s-2 border-transparent py-1 pe-1 text-sm leading-5 text-foreground/65 hover:border-accent/50 hover:text-foreground"
-                  style={`padding-inline-start: ${(heading.depth - 2) * 12}px`}
+                  style={`padding-inline-start: ${(heading.depth - 1) * 10}px`}
                 >
                   <span class="line-clamp-2">{heading.text}</span>
                 </a>
