@@ -132,4 +132,11 @@ export const FRIEND_LINKS: FriendLink[] = [
     signature: "Web苦手😭（我看未必）",
     group: "friends",
   },
+  {
+    id: "si1enc3",
+    url: "https://si1enc3.top",
+    avatar: "	https://si1enc3.top/images/icon/logo.png",
+    signature: "学妹拿下湖南冠军只是时间问题",
+    group: "friends",
+  },
 ];
