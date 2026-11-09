@@ -46,24 +46,3 @@ description: 一句话摘要
 - 友链数据：`src/data/friends.ts`
 
 文章按站点时区 `Asia/Shanghai` 的日期发布；同一天内不再按具体时刻延迟发布。
-
-## 升级与回退
-
-本次升级在 `codex/upgrade-astropaper-7.1.0` 分支完成，升级前版本保存在标签 `backup/astropaper-5.5.1-20261109`（提交 `376e7ab`）。升级不会自动推送或部署。
-
-仅查看旧版，可在保存当前修改后运行：
-
-```bash
-git switch --detach backup/astropaper-5.5.1-20261109
-npm ci
-npm run dev
-```
-
-返回升级分支：
-
-```bash
-git switch codex/upgrade-astropaper-7.1.0
-npm ci
-```
-
-如果合并上线后需要回退，使用 `git revert <升级提交>` 创建撤销提交，检查构建后推送 `main`，GitHub Pages 会重新部署旧版。保留其后的文章提交，不使用 `reset --hard` 或强推。
