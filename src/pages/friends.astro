@@ -1,64 +1,73 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 import Footer from "@/components/Footer.astro";
-import Main from "@/layouts/Main.astro";
+import Main from "@/components/Main.astro";
 import { FRIEND_GROUPS, FRIEND_LINKS, type FriendGroup } from "@/data/friends";
-import { SITE } from "@/config";
+import config from "@/config";
 
 const groups: FriendGroup[] = ["team", "friends"];
 ---
 
-<Layout title={`友链 | ${SITE.title}`} description="朋友们的站点入口。">
+<Layout title={`友链 | ${config.site.title}`} description="朋友们的站点入口。">
   <Header />
+  <Breadcrumb />
   <Main
     pageTitle="友链"
     pageDesc="这里放一些朋友的站点链接。新增友链时，直接编辑 src/data/friends.ts。"
   >
     <div class="space-y-12 pb-10">
       {
-        groups.map((group) => {
-          const links = FRIEND_LINKS.filter((friend) => friend.group === group);
+        groups.map(group => {
+          const links = FRIEND_LINKS.filter(friend => friend.group === group);
           const { title, description } = FRIEND_GROUPS[group];
 
           return (
             <section aria-labelledby={`${group}-heading`}>
               <div class="mb-5 flex items-end justify-between border-b border-border pb-3">
                 <div>
-                  <h2 id={`${group}-heading`} class="text-xl font-semibold text-accent">
+                  <h2
+                    id={`${group}-heading`}
+                    class="text-xl font-semibold text-accent"
+                  >
                     {title}
                   </h2>
                   <p class="mt-1 text-sm text-foreground/70">{description}</p>
                 </div>
-                <span class="text-sm tabular-nums text-foreground/60">{links.length}</span>
+                <span class="text-sm text-foreground/60 tabular-nums">
+                  {links.length}
+                </span>
               </div>
               <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {
-                  links.map((friend) => (
-                    <a
-                      href={friend.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="ui-transition group flex min-h-28 items-center gap-4 border border-border bg-background/80 p-4 hover:border-accent hover:bg-background hover:shadow-sm"
-                    >
-                      <img
-                        src={friend.avatar}
-                        alt={`${friend.id} avatar`}
-                        width="64"
-                        height="64"
-                        class="h-16 w-16 shrink-0 border border-border object-cover transition-transform duration-200 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      <div class="min-w-0">
-                        <h3 class="truncate text-lg font-semibold text-accent">{friend.id}</h3>
-                        <p class="mt-1 truncate text-sm text-foreground/70">{friend.url}</p>
-                        <p class="mt-2 line-clamp-2 text-sm leading-6 text-foreground/85">
-                          {friend.signature}
-                        </p>
-                      </div>
-                    </a>
-                  ))
-                }
+                {links.map(friend => (
+                  <a
+                    href={friend.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="ui-transition group flex min-h-28 items-center gap-4 border border-border bg-background/80 p-4 hover:border-accent hover:bg-background hover:shadow-sm"
+                  >
+                    <img
+                      src={friend.avatar}
+                      alt={`${friend.id} avatar`}
+                      width="64"
+                      height="64"
+                      class="h-16 w-16 shrink-0 border border-border object-cover transition-transform duration-200 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div class="min-w-0">
+                      <h3 class="truncate text-lg font-semibold text-accent">
+                        {friend.id}
+                      </h3>
+                      <p class="mt-1 truncate text-sm text-foreground/70">
+                        {friend.url}
+                      </p>
+                      <p class="mt-2 line-clamp-2 text-sm leading-6 text-foreground/85">
+                        {friend.signature}
+                      </p>
+                    </div>
+                  </a>
+                ))}
               </div>
             </section>
           );

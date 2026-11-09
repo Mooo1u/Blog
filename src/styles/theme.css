@@ -1,0 +1,34 @@
+:root,
+html[data-theme="light"] {
+  --background: #f7fbff;
+  --foreground: #243240;
+  --accent: #69b7ff;
+  --accent-foreground: #18222d;
+  --muted-foreground: #647787;
+  --muted: #dbeaf6;
+  --border: #d7e6f2;
+}
+
+html[data-theme="dark"] {
+  --background: #18222d;
+  --foreground: #e7f1fb;
+  --accent: #7cc4ff;
+  --accent-foreground: #18222d;
+  --muted-foreground: #a3b6c8;
+  --muted: #243746;
+  --border: #355164;
+}
+
+@theme inline {
+  --font-app:
+    "Consolas", "Source Code Pro", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", monospace;
+  --font-code: "Consolas", "Source Code Pro", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}

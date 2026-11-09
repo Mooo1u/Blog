@@ -1,17 +1,21 @@
 # Mo1u's Blog
 
-基于 AstroPaper 的个人博客，使用 Astro 生成静态页面，文章主要写在 Markdown 文件里。
+基于 [AstroPaper 7.1.0](https://github.com/satnaing/astro-paper/releases/tag/v7.1.0) 的个人博客，使用 Astro 生成静态页面，部署在 GitHub Pages。
 
 ## 本地开发
 
+使用 Node.js 24.16+（也支持 22.23.4+ 的 22.x）。CI 使用 Node 24。
+
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
+`npm run build` 会先检查类型，再生成静态页面和 Pagefind 搜索索引。查看构建结果可运行 `npm run preview`。
+
 ## 写文章
 
-在 `src/data/blog/` 下新增 `.md` 文件，例如：
+在 `src/content/posts/` 下新增 `.md` 或 `.mdx` 文件，例如：
 
 ```md
 ---
@@ -26,4 +30,40 @@ description: 一句话摘要
 ---
 
 正文内容
+
+![图片描述](../images/example.png)
 ```
+
+文章图片放在 `src/content/images/`；关于页在 `src/content/pages/about.md`。
+
+目录自动收录文章的一级到六级标题：桌面在侧边显示，小屏通过悬浮按钮打开。单篇文章可设置 `hideToc: true` 隐藏目录。文章内图片支持点击放大、滚轮缩放、拖动和手机双指缩放。
+
+## 配置
+
+- 站点信息、分页、功能开关、社交链接：`astro-paper.config.ts`
+- 配色、字体：`src/styles/theme.css`
+- 中文界面文字：`src/i18n/lang/zh-CN.ts`
+- 友链数据：`src/data/friends.ts`
+
+文章按站点时区 `Asia/Shanghai` 的日期发布；同一天内不再按具体时刻延迟发布。
+
+## 升级与回退
+
+本次升级在 `codex/upgrade-astropaper-7.1.0` 分支完成，升级前版本保存在标签 `backup/astropaper-5.5.1-20261109`（提交 `376e7ab`）。升级不会自动推送或部署。
+
+仅查看旧版，可在保存当前修改后运行：
+
+```bash
+git switch --detach backup/astropaper-5.5.1-20261109
+npm ci
+npm run dev
+```
+
+返回升级分支：
+
+```bash
+git switch codex/upgrade-astropaper-7.1.0
+npm ci
+```
+
+如果合并上线后需要回退，使用 `git revert <升级提交>` 创建撤销提交，检查构建后推送 `main`，GitHub Pages 会重新部署旧版。保留其后的文章提交，不使用 `reset --hard` 或强推。
